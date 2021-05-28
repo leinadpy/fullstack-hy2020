@@ -8,6 +8,7 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [countriesToShow, setCountriesToShow] = useState([]);
   const [countryToShow, setCountryToShow] = useState({});
+  const [showCountry, setShowCountry] = useState(false);
   const [weatherCountry, setWeatherCountry] = useState({});
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const App = () => {
         )
         .then((response) => {
           setWeatherCountry(response.data);
-          console.log(response.data);
+          setShowCountry(true);
         });
     }
   }, [countryToShow]);
@@ -41,6 +42,7 @@ const App = () => {
       }
     } else {
       setCountriesToShow([]);
+      setShowCountry(false);
     }
   };
 
@@ -60,7 +62,7 @@ const App = () => {
         <p>Too many matches, specify another filter</p>
       ) : countriesToShow.length > 1 ? (
         <Countries countriesToShow={countriesToShow} onClick={handleClick} />
-      ) : countriesToShow.length === 1 ? (
+      ) : showCountry ? (
         <Country
           countryToShow={countryToShow}
           weatherCountry={weatherCountry}
