@@ -1,6 +1,5 @@
 const express = require("express");
 const morgan = require("morgan");
-var uuid = require("node-uuid");
 morgan.token("id", function getId(req) {
   return req.id;
 });
